@@ -1,4 +1,5 @@
 class City < ApplicationRecord
-	has_many :dogs
-	has_many :dogsitters
+	has_many :appointments
+	has_many :doctors
+	has_many :patients
 end
