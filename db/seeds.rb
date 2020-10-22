@@ -7,26 +7,21 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-require "faker"
-
+require 'faker'
 
 
 10.times do
-	city = City.create(name: Faker::Address.city, zip_code: "#{Faker::Number.number(digits: 5)}")
-end
-
-20.times do
-	gosip = Gosip.create(title: Faker::Book.title, content: Faker::Lorem.sentences, user: User.find(rand(1..4)))
+	city = City.create!(name: Faker::Address.city )
 end
 
 10.times do
-	tag = Tag.create(title: "##{Faker::Lorem.characters(number: 10)}")
+	dog = Dog.create!(name: Faker::Creature::Dog.name, city: City.find(rand(1..10)))
 end
 
 10.times do
-	user = User.create!(city: City.find(rand(1..10)), first_name: Faker::Name.last_name, last_name: Faker::Name.last_name, description: Faker::Lorem.sentences, email: Faker::Internet.email, age: rand(0..101) )
+	dogsitter = Dogsitter.create!(name: Faker::Name.name, age: Faker::Number.number(digits: 2), city: City.find(rand(1..10)))
 end
 
-10.times do
-	gosiptag = Gosiptag.create!(gosip: Gosip.find(rand(1..10)), tag: Tag.find(rand(1..10)))
+25.times do
+	stroll = Stroll.create!(dogsitter: Dogsitter.find(rand(1..10)), dog: Dog.find(rand(1..10)))
 end

@@ -10,57 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_185349) do
+ActiveRecord::Schema.define(version: 2020_10_22_165305) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
-    t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "gosips", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.integer "user_id"
+  create_table "dogs", force: :cascade do |t|
+    t.string "name"
+    t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_gosips_on_user_id"
+    t.index ["city_id"], name: "index_dogs_on_city_id"
   end
 
-  create_table "gosiptags", force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "gosip_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["gosip_id"], name: "index_gosiptags_on_gosip_id"
-    t.index ["tag_id"], name: "index_gosiptags_on_tag_id"
-  end
-
-  create_table "private_messages", force: :cascade do |t|
-    t.text "content"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_private_messages_on_user_id"
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.text "description"
-    t.string "email"
+  create_table "dogsitters", force: :cascade do |t|
+    t.string "name"
     t.integer "age"
     t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["city_id"], name: "index_users_on_city_id"
+    t.index ["city_id"], name: "index_dogsitters_on_city_id"
+  end
+
+  create_table "strolls", force: :cascade do |t|
+    t.integer "dog_id"
+    t.integer "dogsitter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dog_id"], name: "index_strolls_on_dog_id"
+    t.index ["dogsitter_id"], name: "index_strolls_on_dogsitter_id"
   end
 
 end
